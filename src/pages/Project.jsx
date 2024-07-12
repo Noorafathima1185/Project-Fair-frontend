@@ -23,13 +23,11 @@ function Project() {
       <div className="col-md-4">
         <ProjectCard/>
       </div>
-      <div className="col-md-4">
-      <ProjectCard/>
-      </div>
-      <div className="col-md-4">
-      <ProjectCard/>
-      </div>
+      <div className="col-md-4"></div>
+      <div className="col-md-4"></div>
     </div>
+
+    <p className='text-center text-danger mt-5 fs-3 mb-4'>No Project To Display</p>
     </>
   )
 }

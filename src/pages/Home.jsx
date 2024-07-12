@@ -14,8 +14,8 @@ function Home() {
         <Col xs={12} md={6} className='ps-5'>
         <h1 className='text-light' style={{fontSize:'70px'}}>Project Fair</h1>
         <p className='mt-4'>One stop destination for all software developement Projects</p>
-        <button className='btn btn-warning mt-4'>Get started <FontAwesomeIcon icon={faArrowRight} className='ms-2'/></button>
-        <button className='btn btn-warning mt-4'>ManageProject <FontAwesomeIcon icon={faArrowRight} className='ms-2'/></button>
+        <Link to={'/login'}><button className='btn btn-warning mt-4'>Get started <FontAwesomeIcon icon={faArrowRight} className='ms-2'/></button></Link>
+        <Link to={'/dashboard'}><button className='btn btn-warning mt-4 ms-2'>ManageProject <FontAwesomeIcon icon={faArrowRight} className='ms-2'/></button></Link>
         </Col>
         <Col xs={12} md={6}>
         <img src={titleimage} alt="no image" className='w-75' style={{marginTop:'100px'}}/>

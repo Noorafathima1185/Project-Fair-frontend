@@ -9,10 +9,10 @@ import { Link } from 'react-router-dom';
 function Header() {
   return (
     <div>
-      <Navbar className="bg-success">
+      <Navbar className="row p-4 bg-success">
         <Container>
           <Link to={'/'} style={{textDecoration:'none'}}>
-            <Navbar.Brand className='text-light fs-3'>
+            <Navbar.Brand className='text-light fs-3 ms-5'>
             <FontAwesomeIcon icon={faStackOverflow} size="lg" className='me-3'/>
               Project FAIR
             </Navbar.Brand>

@@ -17,7 +17,7 @@ function App() {
       <Route path='/project' element={<Project/>} />
       <Route path='/dashboard' element={<Dashboard/>} />
       <Route path='/login' element={<Auth/>} />
-      <Route path='/register' element={<Auth/>} />
+      <Route path='/register' element={<Auth register/>} />
       <Route path='*' element={<PageNotFound/>} />
       {/*  * access the path that is not set */}
      </Routes>

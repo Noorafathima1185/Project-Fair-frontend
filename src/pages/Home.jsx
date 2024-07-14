@@ -36,7 +36,7 @@ function Home() {
           <ProjectCard/>
         </div>
       </div>
-      <Link to={'/projects'} className='text-center text-danger'><h5 className='mb-4'>See More Projects</h5></Link>
+      <Link to={'/project'} className='text-center text-danger'><h5 className='mb-4'>See More Projects</h5></Link>
     </div>
     </>
   )

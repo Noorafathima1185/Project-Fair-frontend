@@ -7,6 +7,15 @@ import Modal from 'react-bootstrap/Modal';
 
 function AddProject() {
   const [show, setShow] = useState(false);
+  const [projectDetails, setProjectDetails] = useState({
+    title:"",
+    language:"",
+    github:"",
+    website:"",
+    overview:"",
+    projectimg:""
+  })
+  console.log(projectDetails);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -29,19 +38,19 @@ function AddProject() {
 
             <form className='p-3'>
               <div className="mb-3">
-                <input type="text" placeholder='Title' className='form-control'/>
+                <input type="text" placeholder='Title' className='form-control' onChange={(e)=>setProjectDetails({...projectDetails,title:e.target.value})}/>
               </div>
               <div className="mb-3">
-              <input type="text" placeholder='Language' className='form-control'/>
+              <input type="text" placeholder='Language' className='form-control' onChange={(e)=>setProjectDetails({...projectDetails,language:e.target.value})}/>
               </div>
               <div className="mb-3">
-              <input type="text" placeholder='GitHub' className='form-control'/>
+              <input type="text" placeholder='GitHub' className='form-control' onChange={(e)=>setProjectDetails({...projectDetails,github:e.target.value})}/>
               </div>
               <div className="mb-3">
-              <input type="text" placeholder='Website' className='form-control'/>
+              <input type="text" placeholder='Website' className='form-control' onChange={(e)=>setProjectDetails({...projectDetails,website:e.target.value})}/>
               </div>
               <div className="mb-3">
-              <textarea placeholder='OverView' className='form-control' rows={'4'}></textarea>
+              <textarea placeholder='OverView' className='form-control' rows={'4'} onChange={(e)=>setProjectDetails({...projectDetails,overview:e.target.value})}></textarea>
               </div>
             </form>
             </Col>

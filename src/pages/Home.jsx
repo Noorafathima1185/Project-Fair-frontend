@@ -1,12 +1,23 @@
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import titleimage from '../assets/home-image.png'
 import ProjectCard from '../components/ProjectCard'
 import { Link } from 'react-router-dom'
 
 function Home() {
+  const [isLogin , setIsLogin] = useState(false)
+
+  useEffect(()=>{
+    if(sessionStorage.getItem("token")){
+      setIsLogin(true)
+    }
+    else{
+      setIsLogin(false)
+    }
+  },[])
+
   return (
     <>
     <div className="container-fluid bg-success" style={{height:'100vh'}}>
@@ -14,8 +25,8 @@ function Home() {
         <Col xs={12} md={6} className='ps-5'>
         <h1 className='text-light' style={{fontSize:'70px'}}>Project Fair</h1>
         <p className='mt-4'>One stop destination for all software developement Projects</p>
-        <Link to={'/login'}><button className='btn btn-warning mt-4'>Get started <FontAwesomeIcon icon={faArrowRight} className='ms-2'/></button></Link>
-        <Link to={'/dashboard'}><button className='btn btn-warning mt-4 ms-2'>ManageProject <FontAwesomeIcon icon={faArrowRight} className='ms-2'/></button></Link>
+        {!isLogin? <Link to={'/login'}><button className='btn btn-warning mt-4'>Get started <FontAwesomeIcon icon={faArrowRight} className='ms-2'/></button></Link>:
+        <Link to={'/dashboard'}><button className='btn btn-warning mt-4 ms-2'>ManageProject <FontAwesomeIcon icon={faArrowRight} className='ms-2'/></button></Link>}
         </Col>
         <Col xs={12} md={6}>
         <img src={titleimage} alt="no image" className='w-75' style={{marginTop:'100px'}}/>

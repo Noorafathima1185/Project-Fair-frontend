@@ -16,3 +16,20 @@ export const loginApi = async(reqBody)=>{
 export const addProjectApi = async(reqBody, reqHeader)=>{
     return await commonApi('POST',`${serverUrl}/addproject`,reqBody,reqHeader)
 }
+
+
+// home project
+export const homeProjectApi = async()=>{
+    return await commonApi('GET',`${serverUrl}/homeproject`,"","")
+}
+
+// all project
+// query parameter = baseurl/search?key=value
+export const allProjectApi = async(searchKey,reqHeader)=>{
+    return await commonApi('GET',`${serverUrl}/allprojects?search=${searchKey}`,"",reqHeader)
+}
+
+// user projects
+export const userProjectApi = async(reqHeader)=>{
+    return await commonApi('GET',`${serverUrl}/userProject`,"",reqHeader)
+}

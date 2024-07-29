@@ -5,9 +5,16 @@ import { Col, Row } from 'react-bootstrap'
 import titleimage from '../assets/home-image.png'
 import ProjectCard from '../components/ProjectCard'
 import { Link } from 'react-router-dom'
+import { homeProjectApi } from '../services/allApi'
 
 function Home() {
   const [isLogin , setIsLogin] = useState(false)
+  const [homeProject, setHomeProject] = useState([])
+
+  const getHomeProject = async()=>{
+    const result = await homeProjectApi()
+    setHomeProject(result.data);
+  }
 
   useEffect(()=>{
     if(sessionStorage.getItem("token")){
@@ -16,6 +23,7 @@ function Home() {
     else{
       setIsLogin(false)
     }
+    getHomeProject()
   },[])
 
   return (
@@ -37,15 +45,12 @@ function Home() {
     <div className="container-fluid">
       <h1 className='text-center mt-5'>Explore Our Projects</h1>
       <div className="row mt-4">
-        <div className="col-md-4 p-4">
-          <ProjectCard/>
-        </div>
-        <div className="col-md-4 p-4">
-          <ProjectCard/>
-        </div>
-        <div className="col-md-4 p-4">
-          <ProjectCard/>
-        </div>
+        {homeProject?.length>0?
+        homeProject?.map((item)=>(<div className="col-md-4 p-4">
+          <ProjectCard projects={item}/>
+        </div>))
+        :null}
+       
       </div>
       <Link to={'/project'} className='text-center text-danger'><h5 className='mb-4'>See More Projects</h5></Link>
     </div>

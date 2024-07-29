@@ -86,6 +86,13 @@ function AddProject() {
   
         const result = await addProjectApi(reqBody,reqHeader)
         console.log(result);
+        if(result.status==200){
+          toast.success('project uploaded successfully')
+          handleClose()
+        }
+        else{
+          toast.error('failed to add project')
+        }
       }
       else{
         toast.info('Please Login')
@@ -95,50 +102,54 @@ function AddProject() {
 
   return (
     <>
-    <button className='btn btn-success' onClick={handleShow}>Add Project</button>
-    <Modal show={show} onHide={handleClose} size='lg'>
-        <Modal.Header closeButton>
-          <Modal.Title className='text-success'>Add Project Details</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Row>
-            <Col sm={12} md={6}>
-            <label htmlFor="projImg">
-              <input id='projImg' type="file" style={{display:'none'}} onChange={(e)=>handleFile(e)}/>
-              <img src={preview?preview:"https://www.svgrepo.com/show/454419/eog-image-photo.svg"} alt="no image" width={'100%'} />
-            </label>
-            </Col>
-            <Col sm={12} md={6}>
-
-            <form className='p-3'>
-              <div className="mb-3">
-                <input type="text" placeholder='Title' value={projectDetails.title} className='form-control' onChange={(e)=>setProjectDetails({...projectDetails,title:e.target.value})}/>
-              </div>
-              <div className="mb-3">
-              <input type="text" placeholder='Language' value={projectDetails.language} className='form-control' onChange={(e)=>setProjectDetails({...projectDetails,language:e.target.value})}/>
-              </div>
-              <div className="mb-3">
-              <input type="text" placeholder='GitHub' value={projectDetails.github} className='form-control' onChange={(e)=>setProjectDetails({...projectDetails,github:e.target.value})}/>
-              </div>
-              <div className="mb-3">
-              <input type="text" placeholder='Website' value={projectDetails.website} className='form-control' onChange={(e)=>setProjectDetails({...projectDetails,website:e.target.value})}/>
-              </div>
-              <div className="mb-3">
-              <textarea placeholder='OverView' value={projectDetails.overview} className='form-control' rows={'4'} onChange={(e)=>setProjectDetails({...projectDetails,overview:e.target.value})}></textarea>
-              </div>
-            </form>
-            </Col>
-          </Row>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="warning" onClick={handleClose1}>
-            Cancel
-          </Button>
-          <Button variant="success" onClick={handleAdd}>
-            Add
-          </Button>
-        </Modal.Footer>
-      </Modal>
+    <div className='ms-auto'>
+      
+      <button className='btn btn-success' onClick={handleShow}>Add Project</button>
+      <Modal show={show} onHide={handleClose} size='lg'>
+          <Modal.Header closeButton>
+            <Modal.Title className='text-success'>Add Project Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Row>
+              <Col sm={12} md={6}>
+              <label htmlFor="projImg">
+                <input id='projImg' type="file" style={{display:'none'}} onChange={(e)=>handleFile(e)}/>
+                <img src={preview?preview:"https://www.svgrepo.com/show/454419/eog-image-photo.svg"} alt="no image" width={'100%'} />
+              </label>
+              </Col>
+              <Col sm={12} md={6}>
+  
+              <form className='p-3'>
+                <div className="mb-3">
+                  <input type="text" placeholder='Title' value={projectDetails.title} className='form-control' onChange={(e)=>setProjectDetails({...projectDetails,title:e.target.value})}/>
+                </div>
+                <div className="mb-3">
+                <input type="text" placeholder='Language' value={projectDetails.language} className='form-control' onChange={(e)=>setProjectDetails({...projectDetails,language:e.target.value})}/>
+                </div>
+                <div className="mb-3">
+                <input type="text" placeholder='GitHub' value={projectDetails.github} className='form-control' onChange={(e)=>setProjectDetails({...projectDetails,github:e.target.value})}/>
+                </div>
+                <div className="mb-3">
+                <input type="text" placeholder='Website' value={projectDetails.website} className='form-control' onChange={(e)=>setProjectDetails({...projectDetails,website:e.target.value})}/>
+                </div>
+                <div className="mb-3">
+                <textarea placeholder='OverView' value={projectDetails.overview} className='form-control' rows={'4'} onChange={(e)=>setProjectDetails({...projectDetails,overview:e.target.value})}></textarea>
+                </div>
+              </form>
+              </Col>
+            </Row>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="warning" onClick={handleClose1}>
+              Cancel
+            </Button>
+            <Button variant="success" onClick={handleAdd}>
+              Add
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        
+    </div>
       <ToastContainer position='top-center' theme='colored' autoClose={2000}/>
     </>
   )

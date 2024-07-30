@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import { addProjectApi } from '../services/allApi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { addResponseContext } from '../context/DataShare';
 
 
 function AddProject() {
@@ -22,6 +23,8 @@ function AddProject() {
 
   const [preview, setPreview] = useState("")
   const [token, setToken] = useState("")
+  const {setAddResponse} = useContext(addResponseContext)
+
   console.log(projectDetails);
 
   const handleFile = (e)=>{
@@ -89,6 +92,7 @@ function AddProject() {
         if(result.status==200){
           toast.success('project uploaded successfully')
           handleClose()
+          setAddResponse(result.data)
         }
         else{
           toast.error('failed to add project')

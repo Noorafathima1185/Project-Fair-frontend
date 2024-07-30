@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AddProject from '../components/AddProject'
 import EditProject from '../components/EditProject'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobe, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import { userProjectApi } from '../services/allApi'
+import { deleteProjectApi, userProjectApi } from '../services/allApi'
+import { addResponseContext } from '../context/DataShare'
+import { Link } from 'react-router-dom'
 
 
 function MyProject() {
   const [userProject,setUserProject] = useState([])
+  const {addResponse} = useContext (addResponseContext)
+  const [deleteStatus, setDeleteStatus] = useState(false)
 
   const getUserProject = async()=>{
     if(sessionStorage.getItem("token")){
@@ -23,9 +27,18 @@ function MyProject() {
 }
 console.log(userProject);
 
+const handleDelete =  async(id)=>{
+  const result = await deleteProjectApi(id)
+  console.log(result);
+  if(result.status==200){
+    setDeleteStatus(true)
+  }
+}
+
   useEffect(()=>{
     getUserProject()
-  },[])
+    setDeleteStatus(false)
+  },[addResponse,deleteStatus])
 
   return (
     <div className='shadow px-4 py-4 rounded'>
@@ -40,9 +53,9 @@ console.log(userProject);
 
         <div className='d-flex align-items-center'>
           <EditProject/>
-          <FontAwesomeIcon icon={faGlobe} className='text-warning ms-3'/>
-          <FontAwesomeIcon icon={faGithub} className='text-success ms-3'/>
-          <FontAwesomeIcon icon={faTrash} className='text-danger ms-3 me-5'/>
+          <Link to={item?.website} target='_blank'><FontAwesomeIcon icon={faGlobe} className='text-warning ms-3'/></Link>
+          <Link to={item?.github} target='_blank'><FontAwesomeIcon icon={faGithub} className='text-success ms-3'/></Link>
+          <FontAwesomeIcon icon={faTrash} className='text-danger ms-3 me-5' onClick={()=>handleDelete(item?._id)}/>
         </div>
       </div>
       ))
@@ -52,7 +65,7 @@ console.log(userProject);
 
 
     </div>
-  )
+   )
 }
 
 export default MyProject

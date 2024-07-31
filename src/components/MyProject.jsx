@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobe, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { deleteProjectApi, userProjectApi } from '../services/allApi'
-import { addResponseContext } from '../context/DataShare'
+import { addResponseContext, editResponseContext } from '../context/DataShare'
 import { Link } from 'react-router-dom'
 
 
@@ -13,12 +13,13 @@ function MyProject() {
   const [userProject,setUserProject] = useState([])
   const {addResponse} = useContext (addResponseContext)
   const [deleteStatus, setDeleteStatus] = useState(false)
+  const {editResponse} = useContext(editResponseContext)
 
   const getUserProject = async()=>{
     if(sessionStorage.getItem("token")){
       const token = sessionStorage.getItem("token")
       const reqHeader = {
-        "Content-Type":"multipart/form-data",
+        "Content-Type":"application/json",
         "Authorization":`Bearer ${token}`
     }
     const result = await userProjectApi(reqHeader)
@@ -38,7 +39,7 @@ const handleDelete =  async(id)=>{
   useEffect(()=>{
     getUserProject()
     setDeleteStatus(false)
-  },[addResponse,deleteStatus])
+  },[addResponse,deleteStatus,editResponse])
 
   return (
     <div className='shadow px-4 py-4 rounded'>
@@ -52,7 +53,7 @@ const handleDelete =  async(id)=>{
         <h5>{item.title}</h5>
 
         <div className='d-flex align-items-center'>
-          <EditProject/>
+          <EditProject project={item}/>
           <Link to={item?.website} target='_blank'><FontAwesomeIcon icon={faGlobe} className='text-warning ms-3'/></Link>
           <Link to={item?.github} target='_blank'><FontAwesomeIcon icon={faGithub} className='text-success ms-3'/></Link>
           <FontAwesomeIcon icon={faTrash} className='text-danger ms-3 me-5' onClick={()=>handleDelete(item?._id)}/>

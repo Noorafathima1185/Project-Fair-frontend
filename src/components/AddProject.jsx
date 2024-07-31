@@ -23,6 +23,7 @@ function AddProject() {
 
   const [preview, setPreview] = useState("")
   const [token, setToken] = useState("")
+  const [key, setKey] = useState(0)
   const {setAddResponse} = useContext(addResponseContext)
 
   console.log(projectDetails);
@@ -46,6 +47,12 @@ function AddProject() {
     projectimg:""
     })
     setPreview("")
+    if(key==0){
+      setKey(1)
+    }
+    else{
+      setKey(0)
+    }
   }
 
   useEffect(()=>{
@@ -117,7 +124,7 @@ function AddProject() {
             <Row>
               <Col sm={12} md={6}>
               <label htmlFor="projImg">
-                <input id='projImg' type="file" style={{display:'none'}} onChange={(e)=>handleFile(e)}/>
+                <input id='projImg' type="file" style={{display:'none'}} key={key} onChange={(e)=>handleFile(e)}/>
                 <img src={preview?preview:"https://www.svgrepo.com/show/454419/eog-image-photo.svg"} alt="no image" width={'100%'} />
               </label>
               </Col>

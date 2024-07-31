@@ -3,15 +3,21 @@ import React, { createContext, useState } from 'react'
 
 // create context using createcontext
 export const addResponseContext = createContext({})
+export const editResponseContext = createContext({})
 
 
-function DataShare({children}) {
-    const [addResponse, setAddResponse] = useState({})
+function DataShare({ children }) {
+  const [addResponse, setAddResponse] = useState({})
+  const [editResponse, setEditResponse] = useState({})
 
   return (
     // to access the value of the context
-    <addResponseContext.Provider value={{addResponse, setAddResponse}}>
+    <addResponseContext.Provider value={{ addResponse, setAddResponse }}>
+      <editResponseContext.Provider value={{ editResponse, setEditResponse }}>
+
         {children}
+
+      </editResponseContext.Provider>
     </addResponseContext.Provider>
   )
 }

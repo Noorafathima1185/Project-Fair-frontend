@@ -38,3 +38,13 @@ export const userProjectApi = async(reqHeader)=>{
 export const deleteProjectApi = async(id)=>{
     return await commonApi('DELETE',`${serverUrl}/delete/${id}`,{},"")
 }
+
+// edit project
+export const editProjectApi = async(projectid,reqBody,reqHeader)=>{
+    return await commonApi('PUT',`${serverUrl}/editproject/${projectid}`,reqBody,reqHeader)
+}
+
+// edit profile
+export const editProfileApi = async(reqBody, reqHeader)=>{
+    return await commonApi('PUT',`${serverUrl}/editprofile/`,reqBody,reqHeader)
+}

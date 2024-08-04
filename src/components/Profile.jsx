@@ -18,7 +18,7 @@ function Profile() {
     github:"",
     linkedin:"",
     profile:""
-  })
+  });
   
   const [existingImage, setExistingImage] = useState("")
   const [preview, setPreview] = useState("")
@@ -73,6 +73,7 @@ function Profile() {
         if(result.status==200){
           toast.success('profile updated successfully')
           sessionStorage.setItem("existingUser",JSON.stringify(result.data))
+          setEditStatus(true)
         }
         else{
           toast.error('something went to wrong')
